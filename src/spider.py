@@ -7,59 +7,52 @@ from database import insert_product, select_one, update_product
 from models import ProductData
 from telegram import send_product_tg
 
-# brand_list = [
-#     {
-#         "name": "newBalance_footwear",
-#         "url": "15892?attribute_10992=61388&",
-#     },
-#     {
-#         "name": "levis_jeans_jeans",
-#         "url": "7083?attribute_10992=61377&attribute_1047=8393&",
-#     },
-#     {
-#         "name": "levis_sweats",
-#         "url": "7083?attribute_10992=61382&",
-#     },
-#     {
-#         "name": "theNorthFace_outerwear",
-#         "url": "19899?attribute_10992=61380&",
-#     },
-#     {
-#         "name": "converse_footwear_trainers",
-#         "url": "2611?attribute_10992=61388&attribute_1047=8606&",
-#     },
-#     {
-#         "name": "newEra_accessories_cap",
-#         "url": "17372?attribute_1047=8275&",
-#     },
-#     {
-#         "name": "hugo",
-#         "url": "27909?",
-#     },
-#     {
-#         "name": "birkenstock",
-#         "url": "7421?",
-#     },
-#     {
-#         "name": "ugg_footwear_boots",
-#         "url": "2609?attribute_10992=61388&attribute_1047=8585&",
-#     },
-#     {
-#         "name": "vans_footwear_trainers",
-#         "url": "14751?attribute_10992=61388&attribute_1047=8606&",
-#     },
-#     {
-#         "name": "drMartens",
-#         "url": "4650?attribute_10992=61388&",
-#     },
-
-# ]
-
 brand_list = [
+    {
+        "name": "newBalance_footwear",
+        "url": "15892?attribute_10992=61388&",
+    },
     {
         "name": "levis_jeans_jeans",
         "url": "7083?attribute_10992=61377&attribute_1047=8393&",
     },
+    {
+        "name": "levis_sweats",
+        "url": "7083?attribute_10992=61382&",
+    },
+    {
+        "name": "theNorthFace_outerwear",
+        "url": "19899?attribute_10992=61380&",
+    },
+    {
+        "name": "converse_footwear_trainers",
+        "url": "2611?attribute_10992=61388&attribute_1047=8606&",
+    },
+    {
+        "name": "newEra_accessories_cap",
+        "url": "17372?attribute_1047=8275&",
+    },
+    {
+        "name": "hugo",
+        "url": "27909?",
+    },
+    {
+        "name": "birkenstock",
+        "url": "7421?",
+    },
+    {
+        "name": "ugg_footwear_boots",
+        "url": "2609?attribute_10992=61388&attribute_1047=8585&",
+    },
+    {
+        "name": "vans_footwear_trainers",
+        "url": "14751?attribute_10992=61388&attribute_1047=8606&",
+    },
+    {
+        "name": "drMartens",
+        "url": "4650?attribute_10992=61388&",
+    },
+
 ]
 
 headers = {

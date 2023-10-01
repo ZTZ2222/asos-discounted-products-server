@@ -8,7 +8,7 @@ from models import Product, ProductData
 
 load_dotenv()
 
-engine = create_async_engine(os.getenv("DB_URL_ASYNCPG"), echo=True)
+engine = create_async_engine(os.getenv("DB_URL_ASYNCPG"))
 
 Session = async_sessionmaker(bind=engine, expire_on_commit=False)
 

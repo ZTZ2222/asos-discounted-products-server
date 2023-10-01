@@ -34,7 +34,7 @@ async def send_product_tg(product: Product):
         fm.as_key_value("Прежняя цена", f"£{product.previous_price}"),
         fm.as_key_value("Артикул", product.product_code),
         fm.HashTag(
-            "_".join(str(product.brand_name).lower().strip("'").split(" ")))
+            "_".join(str(product.brand_name).lower().split(" ")))
     )
 
     await bot.send_photo(chat_id=user_id, photo=product.images[0], caption=content.as_markdown())

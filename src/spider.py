@@ -1,9 +1,11 @@
 import asyncio
 import random
-from typing import Any, Dict, List
 import aiohttp
-from database import insert_product, select_one, update_product
+import schedule
+from typing import Any, Dict, List
+from pytz import timezone
 
+from database import insert_product, select_one, update_product
 from models import ProductData
 from telegram import send_product_tg
 
@@ -55,6 +57,12 @@ brand_list = [
 
 ]
 
+brand_list = [
+    {
+        "name": "levis_jeans_jeans",
+        "url": "7083?attribute_10992=61377&attribute_1047=8393&",
+    },
+]
 headers = {
     "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Mobile Safari/537.36",
     "Cookie": "browseCountry=TR; browseCurrency=GBP;"
@@ -138,13 +146,22 @@ async def gather_data():
                     get_data(session=session, brand=brand, offset=offset))
                 tasks.append(task)
             await asyncio.gather(*tasks)
-            await asyncio.sleep(60)
+            sleep_duration = random.uniform(2, 4)
+            await asyncio.sleep(sleep_duration)
+
+
+def job():
+    asyncio.create_task(gather_data())
+
+
+# Schedule the job to run at 16:00 Bishkek time every day
+schedule.every().day.at("23:32", timezone('Asia/Bishkek')).do(job)
 
 
 async def main():
     while True:
-        await gather_data()
-        await asyncio.sleep(30)
+        schedule.run_pending()
+        await asyncio.sleep(1)
 
 
 if __name__ == "__main__":

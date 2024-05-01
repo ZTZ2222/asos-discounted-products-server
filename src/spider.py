@@ -1,15 +1,19 @@
 import asyncio
 import random
-import aiohttp
-import schedule
-import os
-from dotenv import load_dotenv
+from datetime import datetime, timezone
 from typing import Any, Dict, List
-from pytz import timezone
 
-from database import insert_product, select_one, update_product
-from models import ProductData
-from telegram import send_product_tg
+import aiohttp
+from dotenv import load_dotenv
+
+from services.services import (
+    delete_old_products,
+    insert_product,
+    select_one,
+    update_product,
+)
+from schemas.schemas import SProduct
+from src.telegram import send_product_tg
 
 load_dotenv()
 
@@ -58,17 +62,15 @@ brand_list = [
         "name": "drMartens",
         "url": "4650?attribute_10992=61388&",
     },
-
 ]
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Mobile Safari/537.36",
-    "Cookie": "browseCountry=TR; browseCurrency=GBP;"
+    "Cookie": "browseCountry=TR; browseCurrency=GBP;",
 }
 
 
 async def get_data(session: aiohttp.ClientSession, brand: Dict, offset: int) -> None:
-
     url = f"https://www.asos.com/api/product/search/v2/categories/{brand.get('url')}offset={offset}&limit=199&range=sale&store=ROE&lang=en-GB&currency=GBP&rowlength=4&channel=desktop-web&country=TR&keyStoreDataversion=h7g0xmn-38"
 
     message_counter = 0
@@ -78,41 +80,40 @@ async def get_data(session: aiohttp.ClientSession, brand: Dict, offset: int) -> 
         products: List[Dict] = data.get("products", [])
         if products:
             for product in products:
-                current_price = product.get(
-                    "price").get("current").get("value")
+                current_price = product.get("price").get("current").get("value")
 
-                previous_price = product.get(
-                    "price").get("previous").get("value")
+                previous_price = product.get("price").get("previous").get("value")
                 if not previous_price:
-                    previous_price = product.get(
-                        "price").get("rrp").get("value")
+                    previous_price = product.get("price").get("rrp").get("value")
 
                 try:
-                    discount_percent = round(
-                        (1 - current_price / previous_price) * 100)
+                    discount_percent = round((1 - current_price / previous_price) * 100)
                 except:
                     discount_percent = 0
 
-                product_data = ProductData(
+                product_data = SProduct(
                     id=product.get("id"),
                     name=product.get("name"),
                     brand_name=product.get("brandName"),
-                    current_price=product.get("price").get(
-                        "current").get("value"),
+                    current_price=product.get("price").get("current").get("value"),
                     previous_price=previous_price,
                     discount_percent=discount_percent,
                     currency=product.get("price").get("currency"),
                     url=product.get("url"),
-                    images=[product.get("imageUrl")] +
-                    product.get("additionalImageUrls"),
+                    images=[product.get("imageUrl")]
+                    + product.get("additionalImageUrls"),
                     product_code=product.get("productCode"),
                     selling_fast=product.get("isSellingFast"),
+                    updated_at=datetime.now(timezone.utc),
                 )
 
                 existing_product = await select_one(id=product_data.id)
                 if not existing_product:
                     product_db = await insert_product(product_data)
-                elif existing_product and existing_product.currency != product_data.currency:
+                elif (
+                    existing_product
+                    and existing_product.currency != product_data.currency
+                ):
                     product_db = await update_product(product_data)
                 else:
                     product_db = None
@@ -141,26 +142,33 @@ async def gather_data():
             tasks = []
             for offset in range(0, total_items, 199):
                 task = asyncio.create_task(
-                    get_data(session=session, brand=brand, offset=offset))
+                    get_data(session=session, brand=brand, offset=offset)
+                )
                 tasks.append(task)
             await asyncio.gather(*tasks)
             sleep_duration = random.uniform(2, 4)
             await asyncio.sleep(sleep_duration)
 
+        session.close()
 
-def job():
-    asyncio.create_task(gather_data())
+    # Delete old products
+    await delete_old_products()
 
 
-# Schedule the job to run
-schedule.every().day.at(os.getenv("SCHEDULE_TIME"),
-                        timezone('Asia/Bishkek')).do(job)
+# def job():
+#     asyncio.create_task(gather_data())
+
+
+# # Schedule the job to run
+# schedule.every().day.at(os.getenv("SCHEDULE_TIME"),
+#                         timezone('Asia/Bishkek')).do(job)
 
 
 async def main():
-    while True:
-        schedule.run_pending()
-        await asyncio.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     await asyncio.sleep(1)
+    await gather_data()
 
 
 if __name__ == "__main__":

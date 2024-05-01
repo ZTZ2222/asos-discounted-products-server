@@ -5,9 +5,15 @@ WORKDIR /project
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Poetry
+RUN pip install poetry
+
+# Copy only the dependency files for faster builds
+COPY pyproject.toml poetry.lock ./
+
+# Install dependencies using Poetry
+RUN poetry config virtualenvs.create false \
+	&& poetry install --no-root --no-interaction --no-ansi
 
 # Install netcat-traditional instead of netcat
 RUN apt-get update && apt-get install -y netcat-traditional

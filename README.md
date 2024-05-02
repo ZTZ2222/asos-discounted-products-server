@@ -50,6 +50,8 @@ ASOS Shop Server is an API built to scrape discounted products from asos.com, fo
 - Saves scraped products in a PostgreSQL database
 - Provides endpoints to retrieve products based on category, subcategory, brands and discount %
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Getting Started
 
 ### Installation

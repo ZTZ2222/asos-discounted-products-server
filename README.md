@@ -76,6 +76,8 @@ SCHEDULE_TIME="SCHEDULE_TIME"
 docker-compose up --build -d
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Usage
 
 Once the server is running, you can access the API endpoints to retrieve product data:
@@ -110,6 +112,8 @@ GET /products?brand={brand_name}
 GET /products?min_discount={min_discount}
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Rainbow logs with rich :rainbow:
 
 To deliver better user(developer) experience when watching logs with tons of information
@@ -119,6 +123,8 @@ Found [rich](https://github.com/Textualize/rich) really nice -
 but it took time to learn how to integrate it as logger object properly and keep it as singleton.
 
 ![sample-logs-with-rich](/static/logz.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

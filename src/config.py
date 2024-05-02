@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
+    POSTGRES_PORT: int
     POSTGRES_DB: str
 
     @computed_field
@@ -67,6 +68,7 @@ class Settings(BaseSettings):
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             host=self.POSTGRES_HOST,
+            port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
         )
 

@@ -1,9 +1,9 @@
 from datetime import datetime, timezone, timedelta
 from sqlalchemy import select, update, delete, insert
 
-from ..schemas.schemas import SProduct
-from ..models.models import ProductOrm
-from ..database import async_session_factory
+from src.schemas.schemas import SProduct
+from src.models.product import ProductOrm
+from src.database import async_session_factory
 
 
 async def insert_product(product: SProduct) -> ProductOrm:

@@ -5,7 +5,7 @@ from aiogram import Bot
 from aiogram.enums import ParseMode
 from aiogram.utils import formatting as fm
 
-from .models.models import ProductOrm
+from src.models.product import ProductOrm
 
 load_dotenv()
 

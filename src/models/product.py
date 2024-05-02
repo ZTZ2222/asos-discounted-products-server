@@ -3,11 +3,8 @@ import decimal
 from typing import Optional
 from sqlalchemy import ARRAY, TIMESTAMP, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.orm import DeclarativeBase
 
-
-class Base(DeclarativeBase):
-    pass
+from src.models.base import Base
 
 
 # Database Models

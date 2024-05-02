@@ -27,7 +27,8 @@
 
 ## About The Project
 
-ASOS Shop Server is the backend component of ASOS Shop ([asos-shop-client](https://github.com/ZTZ2222/asos-shop-client)), a web application developed using Next.js. It is an API built to scrape discounted products from asos.com, focusing on famous brands like The North Face, New Balance, Levi's, and more. The server scrapes only discount products from these brands and saves them in a PostgreSQL database. The API provides endpoints to access the list of products based on category, subcategory, and brands.
+ASOS Shop Server is an API built to scrape discounted products from asos.com, focusing on famous brands like The North Face, New Balance, Levi's, and more. The server scrapes only discount products from these brands and saves them in a PostgreSQL database. The API provides endpoints to access the list of products based on category, subcategory, and brands.
+ASOS Shop Server is the backend component of ASOS Shop ([asos-shop-client](https://github.com/ZTZ2222/asos-shop-client)).
 
 ### Built With
 

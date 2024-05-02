@@ -61,7 +61,7 @@ ASOS Shop Server is the backend component of ASOS Shop ([asos-shop-client](https
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/asos-shop-server.git
+git clone https://github.com/ZTZ2222/asos-shop-server.git
 ```
 
 2. Navigate into the project directory:

@@ -139,5 +139,5 @@ but it took time to learn how to integrate it as logger object properly and keep
 [docker-url]: https://docs.docker.com/
 [rich.readthedocs.io]: https://img.shields.io/badge/rich-13.7.1-009485?style=for-the-badge&logo=rich&logoColor=white
 [rich-url]: https://rich.readthedocs.io/en/latest/
-[redis.io]: https://img.shields.io/badge/redis-5.0.4-009485?style=for-the-badge&logo=rich&logoColor=white
+[redis.io]: https://img.shields.io/badge/redis-5.0.4-009485?style=for-the-badge&logo=redis&logoColor=white
 [redis-url]: https://redis.io/docs/latest/

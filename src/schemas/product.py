@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class SProduct(BaseModel):
     id: int
     name: str
+    slug: str
     brand_name: str
     current_price: float
     previous_price: Optional[float]

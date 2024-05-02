@@ -1,7 +1,7 @@
 from datetime import datetime, timezone, timedelta
 from sqlalchemy import select, update, delete, insert
 
-from src.schemas.schemas import SProduct
+from src.schemas.product import SProduct
 from src.models.product import ProductOrm
 from src.database import async_session_factory
 

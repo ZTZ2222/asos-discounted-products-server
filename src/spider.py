@@ -6,13 +6,13 @@ from typing import Any, Dict, List
 import aiohttp
 from dotenv import load_dotenv
 
-from services.services import (
+from src.services.product import (
     delete_old_products,
     insert_product,
     select_one,
     update_product,
 )
-from schemas.schemas import SProduct
+from src.schemas.product import SProduct
 from src.telegram import send_product_tg
 
 load_dotenv()

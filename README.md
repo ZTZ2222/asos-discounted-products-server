@@ -43,6 +43,13 @@ ASOS Shop Server is an API built to scrape discounted products from asos.com, fo
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Features
+
+- Scrapes discounted products from asos.com
+- Filters products from famous brands like The North Face, New Balance, Levi's, etc.
+- Saves scraped products in a PostgreSQL database
+- Provides endpoints to retrieve products based on category, subcategory, brands and discount %
+
 ## Getting Started
 
 ### Installation

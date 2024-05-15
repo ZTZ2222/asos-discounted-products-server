@@ -9,15 +9,14 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env", env_ignore_empty=True, extra="ignore"
     )
-    jwt_algorithm: str = os.getenv("JWT_ALGORITHM")
-    jwt_expire: int = os.getenv("JWT_EXPIRE")
 
     REDIS_HOST: str
     REDIS_PORT: int
     REDIS_DB: str
 
-    JWT_ALGORITHM: str
-    JWT_EXPIRE: int
+    JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
+    JWT_EXPIRE: int = os.getenv("JWT_EXPIRE")
+    SECRET_KEY: str = os.getenv("SECRET_KEY")
 
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str

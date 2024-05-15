@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class SProduct(BaseModel):
+class ProductSchema(BaseModel):
     id: int
     name: str
     slug: str

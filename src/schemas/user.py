@@ -17,6 +17,9 @@ class UserResponse(BaseModel):
     last_name: str
     access_token: str
 
+    class Config:
+        from_attributes = True
+
 
 class UserLogin(BaseModel):
     email: EmailStr
